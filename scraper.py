@@ -1,11 +1,12 @@
 from bs4 import BeautifulSoup
-
+import requests
 
 def get_html(url):
     """
     Retrieve the HTML from the website at `url`.
     """
-    return None  # TODO: Implement this function
+    page = requests.get(url)
+    return page.text  # TODO: Implement this function
 
 def get_clubs_html():
     """
@@ -36,7 +37,7 @@ def get_elements_with_class(soup, elt, cls):
     Important to know that each element in the list is itself a soup which can be
     queried with the BeautifulSoup API. It's turtles all the way down!
     """ 
-    return soup.findAll(elt, {'class': cls})
+    return soup.findAll(elt, class_ = cls)
 
 def get_clubs(soup):
     """
