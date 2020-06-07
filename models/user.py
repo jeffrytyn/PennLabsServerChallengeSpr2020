@@ -1,4 +1,5 @@
 from db import db
+from flask_sqlalchemy import event
 import bcrypt
 from models.club import ClubModel
 
@@ -53,3 +54,8 @@ class UserModel(db.Model):
     @classmethod
     def find_by_name(cls, username):
         return cls.query.filter_by(username=username).first()
+
+@event.listens_for(UserModel.__table__, 'after_create')
+def put_first_user(target, connection, **kw):
+    db.session.add(UserModel('jen', 'password'))
+    db.session.commit()

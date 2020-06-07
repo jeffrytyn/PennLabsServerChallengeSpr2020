@@ -12,7 +12,6 @@ class User(Resource):
             return user.json(), 200
         return {"message": "No such user exists"}, 400
 
-
 class UserSignUp(Resource):
     @classmethod
     def post(cls):
